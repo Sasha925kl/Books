@@ -1,0 +1,14 @@
+{% extends "base/base_generic.html" %}
+
+{% block title %}Підтвердження видалення{% endblock %}
+
+{% block content %}
+    <h2>Видалити коментар?</h2>
+    <p>Ви впевнені, що хочете видалити цей коментар: "{{ comment.text }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Так, видалити</button>
+        <a href="{% url 'property_detail' property_id=comment.property.id %}">Скасувати</a>
+    </form>
+{% endblock %}

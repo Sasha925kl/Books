@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Мій сайт{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+<style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/header_fixed_width.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: black;
+        }
+</style>
+
+<header class="navbar">
+    <div>
+        <h1><a href="{% url 'home' %}">МійСайт</a></h1>
+    </div>
+    <nav class="nav-links">
+        <a href="{% url 'home' %}">Головна</a>
+        <a href="{% url 'profile' %}">Профіль</a>
+
+        {% if user.is_authenticated %}
+            <span class="user-info">Привіт, {{ user.username }}</span>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Вийти</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Увійти</a>
+            <a href="{% url 'register' %}">Реєстрація</a>
+        {% endif %}
+    </nav>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    &copy; {{ year|default:2025 }} МійСайт. Всі права захищені.
+</footer>
+
+</body>
+</html>

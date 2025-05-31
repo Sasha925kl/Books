@@ -1,0 +1,92 @@
+/* static/css/base.css */
+
+/* Фон сайту */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('/static/images/header_fixed_width.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+/* Навбар */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+}
+
+.navbar-left h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links a, .user-info {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Контент */
+main {
+    padding: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+}
+
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+.profile-container h2,
+.profile-container h3 {
+    text-align: center;
+}
+
+.profile-section {
+    margin-bottom: 30px;
+}
+
+.btn-save, .btn-back {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #1976d2;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-save:hover, .btn-back:hover {
+    background-color: #0d47a1;
+}
+
+.booking-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+ 

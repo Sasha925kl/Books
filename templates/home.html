@@ -1,0 +1,29 @@
+{% extends "base/base_generic.html" %}
+
+
+{% block title %}Головна - Система бронювання{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Доступні кімнати</h1>
+
+  <form method="get" action="{% url 'search_results' %}" class="search-form">
+    <input type="text" name="location" placeholder="Куди поїдемо?" value="{{ request.GET.location }}">
+    <button type="submit">Пошук</button>
+  </form>
+
+  <div class="room-list">
+    {% for room in rooms %}
+      <div class="room-card">
+        <h2>{{ room.name }}</h2>
+        <p>{{ room.description|default:"Опис відсутній" }}</p>
+        <div class="price">Ціна за годину: {{ room.price_per_hour }}₴</div>
+        <div class="location">Локація: {{ room.location }}</div>
+        <a href="{% url 'create_booking' room.id %}" class="button">Забронювати</a>
+      </div>
+    {% empty %}
+      <p>Кімнати не знайдено.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

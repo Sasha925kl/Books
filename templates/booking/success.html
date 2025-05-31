@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Успіх - Система бронювання</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container fade-in">
+        <h1>Бронювання успішно завершено!</h1>
+        <p>Дякуємо за вибір нашої системи. Ваше бронювання успішно завершено.</p>
+        <a class="button" href="{% url 'home' %}">Повернутись на головну сторінку</a>
+    </div>
+</body>
+</html>

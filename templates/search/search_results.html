@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Результати пошуку</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/header_fixed_width.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: black;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+            border-radius: 12px;
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .room-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .room-card {
+            background-color: rgba(240, 240, 240, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .room-card h2 {
+            margin-top: 0;
+            color: #ff6600;
+        }
+
+        .room-card p,
+        .room-card .price,
+        .room-card .location {
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            margin-top: 15px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: #ff9900;
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #ffaa33;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            .room-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Результати пошуку: "{{ query }}"</h1>
+
+    <div class="room-list">
+        {% for room in rooms %}
+            <div class="room-card">
+                <h2>{{ room.name }}</h2>
+                <p>{{ room.description|default:"Опис відсутній" }}</p>
+                <div class="price">Ціна за годину: {{ room.price_per_hour }}₴</div>
+                <div class="location">Локація: {{ room.location }}</div>
+                <div class="rating">
+                    Рейтинг: {{ room.average_rating }} / 5
+                </div>
+                <div class="buttons">
+                    <a href="{% url 'add_rating' room.id %}" class="button">Додати оцінку</a>
+                    <a href="{% url 'add_comment' room.id %}" class="button">Додати коментар</a>
+                    <a href="{% url 'create_booking' room.id %}" class="button">Забронювати</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Нічого не знайдено по вашому запиту.</p>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ property.name }}</h1>
+    <p><strong>Локація:</strong> {{ property.location }}</p>
+    <p><strong>Ціна за ніч:</strong> {{ property.price_per_night }} грн</p>
+    <p><strong>Макс. гостей:</strong> {{ property.max_guests }}</p>
+
+    <hr>
+
+    <h3>Коментарі</h3>
+    {% if comments %}
+        {% for comment in comments %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ comment.user.username }} 
+                        <small class="text-muted">{{ comment.created_at|date:"d.m.Y H:i" }}</small>
+                    </h5>
+                    <p class="card-text">{{ comment.text }}</p>
+
+                    {% if user.is_authenticated and (user == comment.user or user.is_staff) %}
+                        <form method="post" action="{% url 'delete_comment' comment.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Видалити</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Поки що немає коментарів.</p>
+    {% endif %}
+
+    <hr>
+
+    <h3>Залишити коментар</h3>
+    {% if user.is_authenticated %}
+        <form method="post" class="mb-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Надіслати коментар</button>
+        </form>
+    {% else %}
+        <p>Щоб залишити коментар, <a href="{% url 'login' %}">увійдіть в акаунт</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

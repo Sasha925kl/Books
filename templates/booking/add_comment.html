@@ -1,0 +1,6 @@
+<h2>Добавить комментарий для {{ room.name }}</h2>
+<form method="post">
+  {% csrf_token %}
+  <textarea name="comment" rows="4" placeholder="Напишите комментарий..."></textarea>
+  <button type="submit">Отправить</button>
+</form>

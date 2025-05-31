@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Форма бронювання</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Booking System</h1>
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Головна</a>
+            <a href="{% url 'available_rooms' %}">Доступні кімнати</a>
+            {% if user.is_authenticated %}
+                <span class="user-info">Привіт, {{ user.username }}</span>
+                <a href="{% url 'logout' %}">Вийти</a>
+            {% else %}
+                <a href="{% url 'login' %}">Увійти</a>
+                <a href="{% url 'register' %}">Реєстрація</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Бронювання кімнати: {{ room.name }}</h1>
+        <p>{{ room.description }}</p>
+        <p><strong>Ціна за ніч:</strong> {{ room.price }} грн</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button" type="submit">Відправити</button>
+        </form>
+    </div>
+</body>
+</html>

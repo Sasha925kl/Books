@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма бронювання</title>
+</head>
+<body>
+    <h1>Бронювання</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  
+        <button type="submit">Відправити</button>
+    </form>
+</body>
+</html>
